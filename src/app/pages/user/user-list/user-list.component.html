@@ -1,0 +1,59 @@
+<div class="card-body pt-0">
+  <div class="mb-4 d-flex justify-content-between">
+    <button class="btn btn-primary" (click)="create()">Create User</button>
+    <input type="text" class="form-control w-25" placeholder="Search..." (input)="reloadEvent.emit(true)">
+  </div>
+
+  <table class="table table-hover">
+    <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Dni</th>
+      <th>Rol</th>
+      <th>Contacto</th>
+      <th class="text-center">Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+      @for (user of userList; track user) {
+        <tr>
+          <td>
+            <div class="d-flex align-items-center">
+              <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
+                <div class="symbol-label fs-3 bg-light-primary text-primary">
+                  {{ user.person.firstName[0].toUpperCase() }}
+                </div>
+              </div>
+              <div class="d-flex flex-column">
+                <a href="javascript:;" class="text-gray-800 text-hover-primary mb-1">
+                  {{ user.person.firstName }}
+                </a>
+                <span>{{ user.person.email }}</span>
+              </div>
+            </div>
+          </td>
+          <td>{{ user.person.dni }}</td>
+          <td>{{ user.roles[0] || '' }}</td>
+          <td>
+            <div>
+              {{ user.person.phone }}
+            </div>
+          </td>
+
+          <td class="text-center">
+            <button class="btn btn-icon btn-light-twitter btn-sm me-3"
+                    (click)="delete(user.id)">
+              <i class="bi bi-trash fs-4"></i>
+            </button>
+            <button class="btn btn-icon btn-sm me-3 btn-light-facebook"
+
+                    style="color: #0acf83"
+                    (click)="edit(user.id)">
+              <i class="bi bi-pencil fs-4"></i>
+            </button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
