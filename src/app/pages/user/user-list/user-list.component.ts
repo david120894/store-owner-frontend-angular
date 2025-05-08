@@ -13,7 +13,6 @@ import {SharedModule} from "../../../_metronic/shared/shared.module";
   styleUrl: './user-list.component.scss'
 })
 export class UserListComponent implements OnInit {
-  reloadEvent: EventEmitter<boolean> = new EventEmitter()
 
   userList: Array<UserResponseDto>
 
