@@ -1,57 +1,63 @@
-<div class="card-body pt-0">
-  <table class="table table-hover table-bordered" style="border: #5d78ff; border-radius: 120px">
-    <thead class="table-flush" style="background: #5d78ff">
-    <tr class="">
-      <th>#</th>
-      <th>Usuario</th>
-      <th>Nombre</th>
-      <th>Correo</th>
-      <th>Dni</th>
-      <th>Rol</th>
-      <th>Contacto</th>
-      <th class="text-center">Acciones</th>
-    </tr>
-    </thead>
-    <tbody >
-      @for (user of userList; track user) {
-        <tr>
-          <td class="align-content-center">{{$index + 1}}</td>
-          <td>
-            <div class="d-flex align-items-center">
-              <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-                <div class="symbol-label fs-3 bg-light-primary text-primary">
-                  {{ user.username[0].toUpperCase() }}
+<div class="card-body py-3">
+  <div class="table-responsive">
+    <div class="text-end">
+      <button class="btn btn-radius btn-hover-outline btn-outline-primary"
+      (click)="openModal()">Nuevo Usuario</button>
+    </div>
+    <table class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4" style="border: #5d78ff; border-radius: 120px">
+      <thead>
+      <tr class="fw-bolder text-muted">
+        <th>#</th>
+        <th>Usuario</th>
+        <th>Nombre</th>
+        <th>Correo</th>
+        <th>Dni</th>
+        <th>Rol</th>
+        <th>Contacto</th>
+        <th class="text-center">Acciones</th>
+      </tr>
+      </thead>
+      <tbody >
+        @for (user of userList; track user) {
+          <tr>
+            <td class="align-content-center">{{$index + 1}}</td>
+            <td>
+              <div class="d-flex align-items-center">
+                <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
+                  <div class="symbol-label fs-3 bg-light-primary text-primary">
+                    {{ user.username[0].toUpperCase() }}
+                  </div>
+                </div>
+                <div>
+                  {{ user.username }}
                 </div>
               </div>
+            </td>
+            <td class="align-content-center">{{ user.person.firstName }} {{ user.person.lastName }}</td>
+            <td class="align-content-center">
+              {{ user.person.email }}
+            </td>
+            <td class="align-content-center">{{ user.person.dni }}</td>
+            <td class="align-content-center">{{ user.roles[0] || '' }}</td>
+            <td class="align-content-center">
               <div>
-                {{ user.username }}
+                {{ user.person.phone }}
               </div>
-            </div>
-          </td>
-          <td class="align-content-center">{{ user.person.firstName }} {{ user.person.lastName }}</td>
-          <td class="align-content-center">
-            {{ user.person.email }}
-          </td>
-          <td class="align-content-center">{{ user.person.dni }}</td>
-          <td class="align-content-center">{{ user.roles[0] || '' }}</td>
-          <td class="align-content-center">
-            <div>
-              {{ user.person.phone }}
-            </div>
-          </td>
+            </td>
 
-          <td class="text-center align-content-center">
-            <button class="btn btn-icon btn-light-twitter btn-sm me-3"
-                    (click)="delete(user.id)">
-              <i class="bi bi-trash fs-4"></i>
-            </button>
-            <button class="btn btn-icon btn-sm me-3 btn-light-facebook"
-                    (click)="edit(user.id)">
-              <i class="bi bi-pencil fs-4"></i>
-            </button>
-          </td>
-        </tr>
-      }
-    </tbody>
-  </table>
+            <td class="text-center align-content-center">
+              <button class="btn btn-icon btn-light-twitter btn-sm me-3"
+                      (click)="delete(user.id)">
+                <i class="bi bi-trash fs-4"></i>
+              </button>
+              <button class="btn btn-icon btn-sm me-3 btn-light-facebook"
+                      (click)="openModal(user.person)">
+                <i class="bi bi-pencil fs-4"></i>
+              </button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
 </div>
