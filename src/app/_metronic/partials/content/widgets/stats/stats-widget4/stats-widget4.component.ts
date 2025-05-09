@@ -41,6 +41,9 @@ function getChartOptions(
   baseColor: string,
   lightColor: string
 ): ApexOptions {
+  // @ts-ignore
+  // @ts-ignore
+  // @ts-ignore
   return {
     series: [
       {
@@ -128,6 +131,8 @@ function getChartOptions(
       hover: {
         filter: {
           type: 'none',
+          // @ts-ignore
+
           value: 0,
         },
       },
@@ -135,6 +140,8 @@ function getChartOptions(
         allowMultipleDataPointsSelection: false,
         filter: {
           type: 'none',
+          // @ts-ignore
+
           value: 0,
         },
       },

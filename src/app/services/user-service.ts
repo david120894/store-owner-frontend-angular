@@ -5,6 +5,7 @@ import {ApiResponseModel} from "../modules/auth/models/api.response.model";
 import {UserResponseDto} from "../models/user-response-dto";
 import {environment} from "../../environments/environment";
 import {UserDto} from "../models/user-dto";
+import {PersonDto} from "../models/person-dto";
 
 @Injectable({
   providedIn: 'root'
@@ -21,5 +22,9 @@ export class UserService {
 
   getUser(): Observable<ApiResponseModel<Array<UserResponseDto>>> {
     return this.http.get<ApiResponseModel<Array<UserResponseDto>>>(`${this.apiUrl}/users`);
+  }
+
+  updateUser(idPerson:number,body:PersonDto):Observable<ApiResponseModel<UserResponseDto>>{
+      return this.http.put<ApiResponseModel<UserResponseDto>>(`${this.apiUrl}/person/update/${idPerson}`,body)
   }
 }

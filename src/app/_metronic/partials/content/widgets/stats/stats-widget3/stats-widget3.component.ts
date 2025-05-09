@@ -128,6 +128,8 @@ function getChartOptions(
       hover: {
         filter: {
           type: 'none',
+          // @ts-ignore
+
           value: 0,
         },
       },
@@ -135,6 +137,8 @@ function getChartOptions(
         allowMultipleDataPointsSelection: false,
         filter: {
           type: 'none',
+          // @ts-ignore
+
           value: 0,
         },
       },

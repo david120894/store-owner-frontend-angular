@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { NgbModal, NgbModalOptions, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { DataTableDirective } from 'angular-datatables';
+import DataTables from 'datatables.net';
 import { fromEvent } from 'rxjs';
 import { debounceTime, map } from 'rxjs/operators';
 import { SweetAlertOptions } from 'sweetalert2';
@@ -14,6 +15,7 @@ import { SweetAlertOptions } from 'sweetalert2';
 })
 export class CrudComponent implements OnInit, AfterViewInit, OnDestroy {
 
+  // @ts-ignore
   @Input() datatableConfig: DataTables.Settings = {};
 
   @Input() route: string = '/';
@@ -26,6 +28,7 @@ export class CrudComponent implements OnInit, AfterViewInit, OnDestroy {
   @Output() deleteEvent = new EventEmitter<number>();
   @Output() editEvent = new EventEmitter<number>();
   @Output() createEvent = new EventEmitter<boolean>();
+  // @ts-ignore
 
   dtOptions: DataTables.Settings = {};
 
@@ -68,7 +71,8 @@ export class CrudComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.reload) {
       this.reload.subscribe(data => {
         this.modalService.dismissAll();
-        this.datatableElement.dtInstance.then((dtInstance: DataTables.Api) => dtInstance.ajax.reload());
+        // @ts-ignore
+        this.datatableElement.dtInstance.then((dtInstance: DataTables.Api<any>) => dtInstance.ajax.reload());
       });
     }
   }
@@ -172,7 +176,9 @@ export class CrudComponent implements OnInit, AfterViewInit, OnDestroy {
       )
       .subscribe(({ action, value }) => {
         if (action === 'filter') {
-          this.datatableElement.dtInstance.then((dtInstance: DataTables.Api) => dtInstance.search(value).draw());
+          // @ts-ignore
+
+          this.datatableElement.dtInstance.then((dtInstance: DataTables.Api<any>) => dtInstance.search(value).draw());
         }
       });
   }

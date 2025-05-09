@@ -12,6 +12,7 @@ import moment from 'moment';
 export class RoleDetailsComponent implements OnInit {
 
   role$: Observable<IRoleModel>;
+  // @ts-ignore
 
   datatableConfig: DataTables.Settings = {};
 
@@ -27,7 +28,7 @@ export class RoleDetailsComponent implements OnInit {
 
       this.datatableConfig = {
         serverSide: true,
-        ajax: (dataTablesParameters: any, callback) => {
+        ajax: (dataTablesParameters: any, callback:any) => {
           this.apiService.getUsers(id, dataTablesParameters).subscribe(resp => {
             console.log(resp);
             callback(resp);
@@ -35,7 +36,7 @@ export class RoleDetailsComponent implements OnInit {
         },
         columns: [
           {
-            title: 'Name', data: 'name', render: function (data, type, full) {
+            title: 'Name', data: 'name', render: function (data:any, type:any, full:any) {
               const colorClasses = ['success', 'info', 'warning', 'danger'];
               const randomColorClass = colorClasses[Math.floor(Math.random() * colorClasses.length)];
 
@@ -64,7 +65,7 @@ export class RoleDetailsComponent implements OnInit {
             }
           },
           {
-            title: 'Role', data: 'role', render: function (data, type, row) {
+            title: 'Role', data: 'role', render: function (data:any, type:any, row:any) {
               const roleName = row.roles[0]?.name;
               return roleName || '';
             },
@@ -73,19 +74,19 @@ export class RoleDetailsComponent implements OnInit {
             type: 'string',
           },
           {
-            title: 'Last Login', data: 'last_login_at', render: (data, type, full) => {
+            title: 'Last Login', data: 'last_login_at', render: (data:any, type:any, full:any) => {
               const date = data || full.created_at;
               const dateString = moment(date).fromNow();
               return `<div class="badge badge-light fw-bold">${dateString}</div>`;
             }
           },
           {
-            title: 'Joined Date', data: 'created_at', render: function (data) {
+            title: 'Joined Date', data: 'created_at', render: function (data:any) {
               return moment(data).format('DD MMM YYYY, hh:mm a');;
             }
           }
         ],
-        createdRow: function (row, data, dataIndex) {
+        createdRow: function (row:any, data:any, dataIndex:any) {
           $('td:eq(0)', row).addClass('d-flex align-items-center');
         },
       };

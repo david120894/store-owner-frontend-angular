@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UserListingComponent } from './user-listing/user-listing.component';
 import { RouterModule } from '@angular/router';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { CrudModule } from 'src/app/modules/crud/crud.module';
@@ -9,6 +8,7 @@ import { NgbCollapseModule, NgbDropdownModule, NgbNavModule, NgbTooltipModule } 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import {UserListComponent} from "./user-list/user-list.component";
+import {UserListingComponent} from "./user-listing/user-listing.component";
 
 
 
@@ -27,6 +27,10 @@ import {UserListComponent} from "./user-list/user-list.component";
         path: ':id',
         component: UserDetailsComponent,
       },
+      {
+        path:'users',
+        component: UserListingComponent
+      }
     ]),
     CrudModule,
     SharedModule,

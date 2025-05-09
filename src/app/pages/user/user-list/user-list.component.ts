@@ -2,6 +2,9 @@ import {ChangeDetectorRef, Component, EventEmitter, OnInit} from '@angular/core'
 import {UserService} from "../../../services/user-service";
 import {UserResponseDto} from "../../../models/user-response-dto";
 import {SharedModule} from "../../../_metronic/shared/shared.module";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {EditUserComponent} from "../edit-user/edit-user.component";
+import {PersonDto} from "../../../models/person-dto";
 
 @Component({
   selector: 'app-user-list',
@@ -17,7 +20,8 @@ export class UserListComponent implements OnInit {
   userList: Array<UserResponseDto>
 
   constructor(private userService: UserService,
-              private readonly cdr: ChangeDetectorRef) {
+              private readonly cdr: ChangeDetectorRef,
+              private readonly ngModal: NgbModal) {
   }
 
   ngOnInit() {
@@ -45,14 +49,25 @@ export class UserListComponent implements OnInit {
     });*/
   }
 
-  edit(id: number) {
-    // this.aUser = this.apiService.getUser(id);
-    // this.aUser.subscribe((user: IUserModel) => {
-    //   this.userModel = user;
-    // });
+  openModal(currentPerson?: PersonDto) {
+    const modalRef = this.ngModal.open(EditUserComponent,
+      {
+        centered: true,
+        fullscreen:"lg",
+        size: "lg"
+      }
+    )
+    modalRef.componentInstance.person = currentPerson
+    modalRef.result.then(response =>{
+      if (response==='success') {
+        this.getUserList()
+        this.cdr.detectChanges()
+      }
+    })
   }
 
   create() {
     // this.userModel = { id: 0, name: '', email: '', };
   }
+
 }
