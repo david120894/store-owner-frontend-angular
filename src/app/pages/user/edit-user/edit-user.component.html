@@ -1,13 +1,74 @@
 <div class="modal-header ki-color-swatch" style="background:#00AB9A">
   <div class="modal-tittle">
-    <h4>{{ person?'Actualizar':'Agregar Usuario' }}</h4>
+    <h4>{{ person ? 'Actualizar' : 'Agregar Usuario' }}</h4>
   </div>
   <button class="btn btn-close" (click)="ngbActiveModal.close()"></button>
 </div>
 <div class="modal-body">
-<div>
-</div>
+  <div>
+  </div>
   <div [formGroup]="formGroupPerson">
+    @if (!person) {
+      <div class="row mb-3">
+        <div class="col-sm-12 col-md-6 position-relative">
+          <div class="d-flex">
+            Usuario
+            <div class="text-danger ms-1" ngbTooltip="Usuario es requerido">*</div>
+          </div>
+          <div class="position-relative">
+            <input type="text"
+                   class="form-control pe-5"
+                   formControlName="username"
+                   required>
+
+            <i *ngIf="persons.username?.valid"
+               class="bi bi-check-circle-fill text-success position-absolute"
+               style="top: 50%; right: 10px; transform: translateY(-50%); pointer-events: none;"></i>
+
+            <i *ngIf="persons.username.touched && persons.username.invalid"
+               class="bi bi-x-circle-fill text-danger position-absolute"
+               style="top: 50%; right: 10px; transform: translateY(-50%); pointer-events: none;"></i>
+          </div>
+
+          <div *ngIf="persons.username.touched && persons.username.hasError('required')" class="text-danger mt-1">
+            Usuario es requerido
+          </div>
+        </div>
+
+        <div class="col-sm-12 col-md-6 position-relative">
+          <div class="d-flex">
+            Contraseña
+            <div class="text-danger ms-1" ngbTooltip="Contraseña es requerido">*</div>
+          </div>
+          <div class="position-relative">
+            <input
+              [type]="showPassword ? 'text' : 'password'"
+              class="form-control pe-5"
+              formControlName="password"
+              required
+            />
+            <i *ngIf="persons.password?.valid"
+               class="bi bi-check-circle-fill text-success position-absolute"
+               style="top: 50%; right: 35px; transform: translateY(-50%); pointer-events: none;"></i>
+
+            <i *ngIf="persons.password.touched && persons.password.invalid"
+               class="bi bi-x-circle-fill text-danger position-absolute"
+               style="top: 50%; right: 35px; transform: translateY(-50%); pointer-events: none;"></i>
+
+            <i (click)="showPassword = !showPassword"
+               class="bi"
+               [ngClass]="showPassword ? 'bi-eye-slash' : 'bi-eye'"
+               style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); cursor: pointer;"></i>
+          </div>
+
+          <div *ngIf="persons.password.touched && persons.password.hasError('required')" class="text-danger mt-1">
+            Contraseña es requerido
+          </div>
+        </div>
+
+      </div>
+
+    }
     <div class="row mb-3">
       <div class="col-sm-12 col-md-6 position-relative">
         <div class="d-flex">
@@ -36,98 +97,112 @@
 
       <div class="col-sm-12 col-md-6 position-relative">
         <div class="d-flex">
-          Nombres<div class="text-danger ms-1"
-                      ngbTooltip="Apellido es requerido">*</div>
+          Nombres
+          <div class="text-danger ms-1"
+               ngbTooltip="Apellido es requerido">*
+          </div>
         </div>
         <div class="position-relative">
-        <input type="text" class="form-control pe-5"
-        formControlName="lastName"
-        required>
-        <i *ngIf="persons.lastName?.valid"
-           class="bi bi-check-circle-fill text-success position-absolute"
-           style="top: 50%; right: 10px; transform: translateY(-50%); pointer-events: none;"></i>
+          <input type="text" class="form-control pe-5"
+                 formControlName="lastName"
+                 required>
+          <i *ngIf="persons.lastName?.valid"
+             class="bi bi-check-circle-fill text-success position-absolute"
+             style="top: 50%; right: 10px; transform: translateY(-50%); pointer-events: none;"></i>
 
-        <i *ngIf="persons.lastName.touched && persons.lastName.invalid"
-           class="bi bi-x-circle-fill text-danger position-absolute"
-           style="top: 50%; right: 10px; transform: translateY(-50%); pointer-events: none;"></i>
+          <i *ngIf="persons.lastName.touched && persons.lastName.invalid"
+             class="bi bi-x-circle-fill text-danger position-absolute"
+             style="top: 50%; right: 10px; transform: translateY(-50%); pointer-events: none;"></i>
         </div>
         <div *ngIf="persons.lastName.touched && persons.lastName.hasError('required')" class="text-danger mt-1">
           Nombres es requerido
         </div>
       </div>
-
-
     </div>
     <div class="row mb-3">
       <div class="col-sm-12 col-md-6 position-relative">
         <div class="d-flex">
-          Documento de identidad<div class="text-danger ms-1"
-        ngbTooltip="Documento es requerido">*</div>
+          Documento de identidad
+          <div class="text-danger ms-1"
+               ngbTooltip="Documento es requerido">*
+          </div>
         </div>
         <div class="position-relative">
-        <input type="text" class="form-control"
-        formControlName="dni"
-        required>
-        <i *ngIf="persons.dni?.valid"
-           class="bi bi-check-circle-fill text-success position-absolute"
-           style="top: 50%; right: 10px; transform: translateY(-50%); pointer-events: none;"></i>
+          <input type="number" class="form-control"
+                 formControlName="dni"
+                 required>
+          <i *ngIf="persons.dni?.valid"
+             class="bi bi-check-circle-fill text-success position-absolute"
+             style="top: 50%; right: 10px; transform: translateY(-50%); pointer-events: none;"></i>
 
-        <i *ngIf="persons.dni.touched && persons.dni.invalid"
-           class="bi bi-x-circle-fill text-danger position-absolute"
-           style="top: 50%; right: 10px; transform: translateY(-50%); pointer-events: none;"></i>
-      </div>
-      <div *ngIf="persons.dni.touched && persons.dni.hasError('required')" class="text-danger mt-1">
-        N.º doc. es requerido
-      </div>
+          <i *ngIf="persons.dni.touched && persons.dni.invalid"
+             class="bi bi-x-circle-fill text-danger position-absolute"
+             style="top: 50%; right: 10px; transform: translateY(-50%); pointer-events: none;"></i>
+        </div>
+        <div *ngIf="persons.dni.touched && persons.dni.hasError('required')" class="text-danger mt-1">
+          N.º doc. es requerido
+        </div>
+        <div *ngIf="persons.dni.touched && persons.dni.hasError('pattern')" class="text-danger mt-1">
+          N.º doc. no válido
+        </div>
       </div>
       <div class="col-sm-12 col-md-6 position-relative">
         <div class="d-flex">
-          N.º contacto<div class="text-danger ms-1"
-                      ngbTooltip="N.º celular es requerido">*</div>
+          N.º contacto
+          <div class="text-danger ms-1"
+               ngbTooltip="N.º celular es requerido">*
+          </div>
         </div>
         <div class="position-relative">
-        <input type="text" class="form-control"
-        formControlName="phone"
-        required>
-        <i *ngIf="persons.phone?.valid"
-           class="bi bi-check-circle-fill text-success position-absolute"
-           style="top: 50%; right: 10px; transform: translateY(-50%); pointer-events: none;"></i>
+          <input type="number" class="form-control"
+                 formControlName="phone"
+                 required>
+          <i *ngIf="persons.phone?.valid"
+             class="bi bi-check-circle-fill text-success position-absolute"
+             style="top: 50%; right: 10px; transform: translateY(-50%); pointer-events: none;"></i>
 
-        <i *ngIf="persons.phone.touched && persons.phone.invalid"
-           class="bi bi-x-circle-fill text-danger position-absolute"
-           style="top: 50%; right: 10px; transform: translateY(-50%); pointer-events: none;"></i>
-      </div>
-      <div *ngIf="persons.phone.touched && persons.phone.hasError('required')" class="text-danger mt-1">
-        N.º contacto es requerido
-      </div>
+          <i *ngIf="persons.phone.touched && persons.phone.invalid"
+             class="bi bi-x-circle-fill text-danger position-absolute"
+             style="top: 50%; right: 10px; transform: translateY(-50%); pointer-events: none;"></i>
+        </div>
+        <div *ngIf="persons.phone.touched && persons.phone.hasError('required')" class="text-danger mt-1">
+          N.º contacto es requerido
+        </div>
+        <div *ngIf="persons.phone.touched && persons.phone.hasError('pattern')" class="text-danger mt-1">
+          N.º contacto no válido
+        </div>
       </div>
     </div>
     <div class="row mb-3">
       <div class="col-sm-12 col-md-6 position-relative">
         <div class="d-flex">
-          Ciudad<div class="text-danger ms-1"
-                      ngbTooltip="Ciudad es requerido">*</div>
+          Ciudad
+          <div class="text-danger ms-1"
+               ngbTooltip="Ciudad es requerido">*
+          </div>
         </div>
         <div class="position-relative">
-        <input type="text" class="form-control"
-        formControlName="city"
-        required>
-        <i *ngIf="persons.city?.valid"
-           class="bi bi-check-circle-fill text-success position-absolute"
-           style="top: 50%; right: 10px; transform: translateY(-50%); pointer-events: none;"></i>
+          <input type="text" class="form-control"
+                 formControlName="city"
+                 required>
+          <i *ngIf="persons.city?.valid"
+             class="bi bi-check-circle-fill text-success position-absolute"
+             style="top: 50%; right: 10px; transform: translateY(-50%); pointer-events: none;"></i>
 
-        <i *ngIf="persons.city.touched && persons.city.invalid"
-           class="bi bi-x-circle-fill text-danger position-absolute"
-           style="top: 50%; right: 10px; transform: translateY(-50%); pointer-events: none;"></i>
-      </div>
-      <div *ngIf="persons.city.touched && persons.city.hasError('required')" class="text-danger mt-1">
-        Ciudad es requerido
-      </div>
+          <i *ngIf="persons.city.touched && persons.city.invalid"
+             class="bi bi-x-circle-fill text-danger position-absolute"
+             style="top: 50%; right: 10px; transform: translateY(-50%); pointer-events: none;"></i>
+        </div>
+        <div *ngIf="persons.city.touched && persons.city.hasError('required')" class="text-danger mt-1">
+          Ciudad es requerido
+        </div>
       </div>
       <div class="col-sm-12 col-md-6 position-relative">
         <div class="d-flex">
-          Dirección<div class="text-danger ms-1"
-                        ngbTooltip="Dirección es requerido">*</div>
+          Dirección
+          <div class="text-danger ms-1"
+               ngbTooltip="Dirección es requerido">*
+          </div>
         </div>
         <div class="position-relative">
           <input type="text" class="form-control"
@@ -147,37 +222,57 @@
       </div>
     </div>
     <div class="row mb-3">
+      <div class="col-sm-12 col-md-6">
+        <div class="d-flex">
+          Rol
+          <div class="text-danger ms-1"
+               ngbTooltip="Rol es requerido">*
+          </div>
+        </div>
+        <ng-select
+          [readonly]="person"
+          [multiple]="true"
+          class="background-color"
+          [items]="roles"
+          bindLabel="name"
+          formControlName="roles"
+          required>
+        </ng-select>
+      </div>
       <div class="col-sm-12 col-md-6 position-relative">
         <div class="d-flex">
-          Correo<div class="text-danger ms-1"
-                      ngbTooltip="Correo es requerido">*</div>
+          Correo
+          <div class="text-danger ms-1"
+               ngbTooltip="Correo es requerido">*
+          </div>
         </div>
         <div class="position-relative">
-        <input type="text" class="form-control"
-        formControlName="email"
-        required>
-        <i *ngIf="persons.email?.valid"
-           class="bi bi-check-circle-fill text-success position-absolute"
-           style="top: 50%; right: 10px; transform: translateY(-50%); pointer-events: none;"></i>
+          <input type="text" class="form-control"
+                 formControlName="email"
+                 required>
+          <i *ngIf="persons.email?.valid"
+             class="bi bi-check-circle-fill text-success position-absolute"
+             style="top: 50%; right: 10px; transform: translateY(-50%); pointer-events: none;"></i>
 
-        <i *ngIf="persons.email.touched && persons.email.invalid"
-           class="bi bi-x-circle-fill text-danger position-absolute"
-           style="top: 50%; right: 10px; transform: translateY(-50%); pointer-events: none;"></i>
-      </div>
-      <div *ngIf="persons.email.touched && persons.email.hasError('required')" class="text-danger mt-1">
-        Correo es requerido
-      </div>
+          <i *ngIf="persons.email.touched && persons.email.invalid"
+             class="bi bi-x-circle-fill text-danger position-absolute"
+             style="top: 50%; right: 10px; transform: translateY(-50%); pointer-events: none;"></i>
+        </div>
+        <div *ngIf="persons.email.touched && persons.email.hasError('required')" class="text-danger mt-1">
+          Correo es requerido
+        </div>
       </div>
     </div>
   </div>
 </div>
 <div class="modal-footer">
   <button class="btn btn-hover-outline btn-radius btn-outline-danger btn-rad"
-          (click)="ngbActiveModal.close()">Cancelar</button>
+          (click)="ngbActiveModal.close()">Cancelar
+  </button>
   <button class="btn btn-hover-outline btn-radius"
           [ngClass]="person? 'btn-outline-warning':'btn-outline-primary'"
           (click)="person?updatePerson():createPerson()"
   >
-    {{person?'Actualizar':'Guardar'}}
+    {{ person ? 'Actualizar' : 'Guardar' }}
   </button>
 </div>

@@ -53,7 +53,7 @@ export class UserListComponent implements OnInit {
     const modalRef = this.ngModal.open(EditUserComponent,
       {
         centered: true,
-        fullscreen:"lg",
+        fullscreen:"sm",
         size: "lg"
       }
     )
