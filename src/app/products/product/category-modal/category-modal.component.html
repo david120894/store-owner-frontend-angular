@@ -1,0 +1,88 @@
+<div class="modal-header ki-color-swatch" style="background:#00AB9A">
+  <div class="modal-tittle">
+    <h4>{{ category ? 'Actualizar categoria' : 'Agregar categoria' }}</h4>
+  </div>
+  <button class="btn btn-close" (click)="ngbActiveModal.close()"></button>
+</div>
+
+<div class="modal-body">
+  <div [formGroup]="formGroupCategory">
+    <div class="row">
+      <div class="col-sm-12 col-md-6">
+        <div class="d-flex">
+          Tienda
+          <div class="text-danger ms-1"
+               ngbTooltip="Rol es requerido">*
+          </div>
+        </div>
+        <ng-select
+          [readonly]="category"
+          class="background-color"
+          [items]="currentListStore"
+          bindLabel="name"
+          formControlName="store"
+          required>
+        </ng-select>
+      </div>
+      <div class="col-sm-12 col-md-6 position-relative">
+        <div class="d-flex">
+          Categoria
+          <div class="text-danger ms-1" ngbTooltip="Categoria es requerido">*</div>
+        </div>
+        <div class="position-relative">
+          <input type="text"
+                 class="form-control pe-5"
+                 formControlName="categoryName"
+                 required>
+
+          <i *ngIf="categories.categoryName?.valid"
+             class="bi bi-check-circle-fill text-success position-absolute"
+             style="top: 50%; right: 10px; transform: translateY(-50%); pointer-events: none;"></i>
+
+          <i *ngIf="categories.categoryName.touched && categories.categoryName.invalid"
+             class="bi bi-x-circle-fill text-danger position-absolute"
+             style="top: 50%; right: 10px; transform: translateY(-50%); pointer-events: none;"></i>
+        </div>
+
+        <div *ngIf="categories.categoryName.touched && categories.categoryName.hasError('required')" class="text-danger mt-1">
+          Categoria es requerido
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-6 position-relative">
+        <div class="d-flex">
+          Descripcion
+          <div class="text-danger ms-1" ngbTooltip="Descripcion es requerido">*</div>
+        </div>
+        <div class="position-relative">
+          <input type="text"
+                 class="form-control pe-5"
+                 formControlName="categoryDescription"
+                 required>
+
+          <i *ngIf="categories.categoryDescription?.valid"
+             class="bi bi-check-circle-fill text-success position-absolute"
+             style="top: 50%; right: 10px; transform: translateY(-50%); pointer-events: none;"></i>
+
+          <i *ngIf="categories.categoryDescription.touched && categories.categoryDescription.invalid"
+             class="bi bi-x-circle-fill text-danger position-absolute"
+             style="top: 50%; right: 10px; transform: translateY(-50%); pointer-events: none;"></i>
+        </div>
+
+        <div *ngIf="categories.categoryDescription.touched && categories.categoryDescription.hasError('required')" class="text-danger mt-1">
+          Descripcion es requerido
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-hover-outline btn-radius btn-outline-danger btn-rad"
+          (click)="ngbActiveModal.close()">Cancelar
+  </button>
+  <button class="btn btn-hover-outline btn-radius"
+          [ngClass]="category? 'btn-outline-warning':'btn-outline-primary'"
+          (click)="category?updateCategory():createCategory()"
+  >
+    {{ category ? 'Actualizar' : 'Guardar' }}
+  </button>
+</div>
