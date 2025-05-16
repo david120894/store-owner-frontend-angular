@@ -11,7 +11,7 @@ import {CategoryComponent} from "./category/category.component";
 
 
 @NgModule({
-  declarations: [ProductComponent],
+  declarations: [ProductComponent, CategoryComponent],
   imports: [
     CommonModule,
     FormsModule,
