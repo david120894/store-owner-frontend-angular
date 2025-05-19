@@ -3,6 +3,9 @@ import {CategoryService} from "../../../services/category.service";
 import {CategoryDto} from "../../../models/category.dto";
 import {NgbActiveModal, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {CategoryModalComponent} from "../category-modal/category-modal.component";
+import {StoreService} from "../../../services/store.service";
+import {StoreDto} from "../../../models/store.dto";
+import {FormControl, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-category',
@@ -11,17 +14,44 @@ import {CategoryModalComponent} from "../category-modal/category-modal.component
 })
 export class CategoryComponent implements OnInit{
 
-  currentListCategory: Array<CategoryDto>
+  currentListCategory: Array<CategoryDto> = []
+  currentListStore: Array<StoreDto>
+  selectedStore: StoreDto
   constructor(private readonly cdr: ChangeDetectorRef,
     private readonly ngModal:NgbModal,
-    private readonly categoryService: CategoryService) {
-  }
-  ngOnInit() {
-    this.getCategory()
+    private readonly categoryService: CategoryService,
+              private readonly storeService: StoreService,) {
   }
 
-  getCategory() {
-    this.categoryService.getCategory().subscribe({
+  storeForm: FormGroup = new FormGroup({
+    store: new FormControl(null),
+  })
+  ngOnInit() {
+    this.getStore()
+    // this.getCategory()
+  }
+
+  onCategorySelected(store: StoreDto) {
+    this.selectedStore = store
+    this.getCategory(this.selectedStore?.id)
+  }
+
+  getStore() {
+    this.storeService.getStore().subscribe({
+      next :(response)  => {
+        this.currentListStore=response.data
+        this.storeForm.get('store')?.setValue(this.currentListStore[3])
+        this.onCategorySelected(this.currentListStore[3])
+      },
+      error:(err) => {
+
+      }
+    })
+  }
+
+  getCategory(idStore?:number) {
+    if (!idStore) return
+    this.categoryService.getCategoryByStoreId(idStore).subscribe({
       next :(response)  => {
         this.currentListCategory=response.data
         this.cdr.detectChanges()

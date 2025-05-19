@@ -1,1 +1,56 @@
-<p>store works!</p>
+<div class="card-header">
+  <div class="card-title">
+    <h3 class="card-label">Lista de Tiendas</h3>
+  </div>
+  <div class="card-toolbar d-flex justify-content-end">
+    <button class="btn btn-radius btn-hover-outline btn-outline-primary" (click)="openModal()">
+      Nuevo tienda
+    </button>
+  </div>
+</div>
+<div class="card-body">
+  <div class="table-responsive">
+    <table
+      class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4"
+      style="border: #5d78ff; border-radius: 120px"
+    >
+      <thead>
+        <tr class="fw-bolder text-muted">
+          <th>#</th>
+          <th>Nombre</th>
+          <th>Teléfono</th>
+          <th>Descripción</th>
+          <th>Dirección</th>
+          <th class="text-center">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (store of currentListStore; track store) {
+          <tr>
+            <td class="align-content-center">{{$index + 1}}</td>
+            <td>{{ store.name }}</td>
+            <td class="align-content-center">
+              {{ store.phone }}
+            <td>{{ store.description }}</td>
+            <td>{{ store.address }}</td>
+
+            <td class="text-center align-content-center">
+              <button
+                class="btn btn-icon btn-light-twitter btn-sm me-3"
+                (click)="delete(store.id)"
+              >
+                <i class="bi bi-trash fs-4"></i>
+              </button>
+              <button
+                class="btn btn-icon btn-sm me-3 btn-light-facebook"
+                (click)="openModal(store)"
+              >
+                <i class="bi bi-pencil fs-4"></i>
+              </button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

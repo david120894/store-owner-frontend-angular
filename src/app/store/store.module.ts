@@ -8,9 +8,13 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {SweetAlert2Module} from '@sweetalert2/ngx-sweetalert2';
 import {CategoryComponent} from "../products/product/category/category.component";
 import {StoreComponent} from "./store/store.component";
+import {StoreModalComponent} from "./store-modal/store-modal.component";
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    StoreComponent,
+    StoreModalComponent
+  ],
   imports: [
     CommonModule,
     FormsModule,

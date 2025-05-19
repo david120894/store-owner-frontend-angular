@@ -8,6 +8,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {SweetAlert2Module} from '@sweetalert2/ngx-sweetalert2';
 import {ProductComponent} from "./product/product.component";
 import {CategoryComponent} from "./category/category.component";
+import {NgSelectComponent} from "@ng-select/ng-select";
+import {NotFoundComponent} from "../../modules/not-found/not-found.component";
 
 
 @NgModule({
@@ -33,6 +35,8 @@ import {CategoryComponent} from "./category/category.component";
     NgbCollapseModule,
     NgbTooltipModule,
     SweetAlert2Module.forChild(),
+    NgSelectComponent,
+    NotFoundComponent,
   ]
 })
 export class ProductModule {

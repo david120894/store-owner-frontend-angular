@@ -15,6 +15,9 @@ export class CategoryService{
   getCategory(): Observable<ApiResponseModel<Array<CategoryDto>>> {
     return this.httpClient.get<ApiResponseModel<Array<CategoryDto>>>(`${this.url}/category`)
   }
+  getCategoryByStoreId(idStore: number): Observable<ApiResponseModel<CategoryDto[]>> {
+    return this.httpClient.get<ApiResponseModel<CategoryDto[]>>(`${this.url}/category/${idStore}`)
+  }
   createCategory(body: CategoryDto):Observable<ApiResponseModel<CategoryDto>>{
     return this.httpClient.post<ApiResponseModel<CategoryDto>>(`${this.url}/category`,body)
   }

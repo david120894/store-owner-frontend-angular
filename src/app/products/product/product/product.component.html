@@ -1,1 +1,72 @@
-<p>product works!</p>
+<div class="card-body">
+  <div class="table-responsive">
+    <div class="text-center">
+      <h1 class="text-dark fw-bolder mb-10">Categorias</h1>
+      <p class="text-gray-400 fw-bold fs-4">Lista de categorias por Tienda</p>
+    </div>
+    <table class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4" style="border: #5d78ff; border-radius: 120px">
+      <thead>
+        <tr class="fw-bolder text-muted">
+          <th>#</th>
+          <th>Img</th>
+          <th>Nombre</th>
+          <th>Codigo</th>
+          <th class="text-center">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        @if(currentListProduct.length === 0) {
+          <tr>
+            <td colspan="4" class="text-center">
+              <app-not-found [errorMessage]="'No tenemos categorias por el momento'"/>
+            </td>
+          </tr>
+        } @else {
+          @for (product of currentListProduct; track product) {
+            <tr>
+              <td class="align-content-center">{{$index + 1}}</td>
+              <td>
+                <img *ngIf="product.imageUrl"
+                     [src]="'http://localhost:8081' + product.imageUrl"
+                     alt="Producto"
+                     style="max-width: 150px; max-height: 150px; object-fit: contain; cursor: pointer;"
+                     (click)="onImageClick(product)" />
+              </td>
+
+              <td>
+                <div class="d-flex align-items-center">
+                  <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
+                    <div class="symbol-label fs-3 bg-light-primary text-primary">
+                      {{ product.name[0].toUpperCase() }}
+                    </div>
+                  </div>
+                  <div>
+                    {{ product.name }}
+                  </div>
+                </div>
+              </td>
+              <td class="align-content-center">
+                {{ product.code }}
+              </td>
+
+
+              <td class="text-center align-content-center">
+                <button class="btn btn-icon btn-light-twitter btn-sm me-3"
+                        (click)="delete(product.id)">
+                  <i class="bi bi-trash fs-4"></i>
+                </button>
+                <button class="btn btn-icon btn-sm me-3 btn-light-facebook"
+                        (click)="openModal(product)">
+                  <i class="bi bi-pencil fs-4"></i>
+                </button>
+              </td>
+            </tr>
+          }
+        }
+      </tbody>
+
+    </table>
+    <input type="file" id="fileInput" (change)="onFileSelected($event)" style="display: none" />
+
+  </div>
+</div>

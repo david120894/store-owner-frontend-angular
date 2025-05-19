@@ -16,13 +16,20 @@ export class StoreService{
     return this.httpClient.get<ApiResponseModel<Array<StoreDto>>>(`${this.url}/store`)
   }
 
+  getStoreById(idStore: number): Observable<ApiResponseModel<StoreDto>> {
+    return this.httpClient.get<ApiResponseModel<StoreDto>>(`${this.url}/store/${idStore}`)
+  }
+
   createStore(store: StoreDto): Observable<ApiResponseModel<StoreDto>> {
     return this.httpClient.post<ApiResponseModel<StoreDto>>(`${this.url}/store`,store)
   }
 
   updateStore(idStore: number,store: StoreDto): Observable<ApiResponseModel<StoreDto>> {
-    return this.httpClient.post<ApiResponseModel<StoreDto>>(`${this.url}/store/${idStore}`,store)
+    return this.httpClient.put<ApiResponseModel<StoreDto>>(`${this.url}/store/${idStore}`,store)
   }
 
+  deleteStore(idStore: number): Observable<ApiResponseModel<StoreDto>> {
+    return this.httpClient.delete<ApiResponseModel<StoreDto>>(`${this.url}/store/${idStore}`)
+  }
 
 }
