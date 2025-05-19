@@ -1,0 +1,49 @@
+<div class="modal-header">
+  <h5 class="modal-title">Crear Tienda</h5>
+  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="ngActiveModal.close()"></button>
+</div>
+<div class="modal-body">
+  <div [formGroup]="storeForm">
+  <div class="row mb-3">
+      <div class="mb-3 col-sm-12 col-md-5">
+        <label for="name" class="form-label">Nombre</label>
+        <input type="text" class="form-control" id="name" formControlName="name" placeholder="Nombre de la tienda">
+        @if(storeForm.get('name')?.invalid && storeForm.get('name')?.touched) {
+          <div class="text-danger">El nombre es requerido</div>
+        }
+      </div>
+      <div class="mb-3 col-sm-12 col-md-7">
+        <label for="description" class="form-label">Descripción</label>
+        <input type="text" class="form-control" id="description" formControlName="description"
+               placeholder="Descripción de la tienda">
+        @if(storeForm.get('description')?.invalid && storeForm.get('description')?.touched) {
+          <div class="text-danger">La descripción es requerida</div>
+        }
+      </div>
+  </div>
+    <div class="row mb-3">
+      <div class="mb-3 col-sm-12 col-md-6">
+        <label for="address" class="form-label">Dirección</label>
+        <input type="text" class="form-control" id="address" formControlName="address"
+               placeholder="Dirección de la tienda">
+        @if(storeForm.get('address')?.invalid && storeForm.get('address')?.touched) {
+          <div class="text-danger">La dirección es requerida</div>
+        }
+      </div>
+      <div class="mb-3 col-sm-12 col-md-6">
+        <label for="phone" class="form-label">Teléfono</label>
+        <input type="text" class="form-control" id="phone" formControlName="phone"
+               placeholder="Teléfono de la tienda">
+        @if(storeForm.get('phone')?.invalid && storeForm.get('phone')?.touched) {
+          <div class="text-danger">El teléfono es requerido</div>
+        }
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="ngActiveModal.close()">Cerrar</button>
+  <button type="button" class="btn btn-primary"
+          [ngClass]="currentStore? 'btn-warning' : ''"
+          (click)="saveUpdateStore()">{{ currentStore? 'Actualizar':'Guardar' }}</button>
+</div>
