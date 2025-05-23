@@ -9,13 +9,11 @@
   <div [formGroup]="formGroupCategory">
     <div class="row">
       <div class="col-sm-12 col-md-6">
-        <div class="d-flex">
-          Tienda
-          <div class="text-danger ms-1"
-               ngbTooltip="Rol es requerido">*
-          </div>
-        </div>
+        <label for="store">
+          <span class="required fs-6 fw-bolder text-dark ">Tienda</span>
+        </label>
         <ng-select
+          id="store"
           [readonly]="category"
           class="background-color"
           [items]="currentListStore"
@@ -25,12 +23,12 @@
         </ng-select>
       </div>
       <div class="col-sm-12 col-md-6 position-relative">
-        <div class="d-flex">
-          Categoria
-          <div class="text-danger ms-1" ngbTooltip="Categoria es requerido">*</div>
-        </div>
+        <label for="categoryName">
+          <span class="required fs-6 fw-bolder text-dark ">Categoria</span>
+        </label>
         <div class="position-relative">
           <input type="text"
+                  id="categoryName"
                  class="form-control pe-5"
                  formControlName="categoryName"
                  required>
@@ -49,12 +47,12 @@
         </div>
       </div>
       <div class="col-sm-12 col-md-6 position-relative">
-        <div class="d-flex">
-          Descripcion
-          <div class="text-danger ms-1" ngbTooltip="Descripcion es requerido">*</div>
-        </div>
+        <label for="categoryDescription">
+          <span class="required fs-6 fw-bolder text-dark ">Descripcion</span>
+        </label>
         <div class="position-relative">
           <input type="text"
+                  id="categoryDescription"
                  class="form-control pe-5"
                  formControlName="categoryDescription"
                  required>

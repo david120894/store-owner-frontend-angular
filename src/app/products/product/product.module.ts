@@ -10,10 +10,12 @@ import {ProductComponent} from "./product/product.component";
 import {CategoryComponent} from "./category/category.component";
 import {NgSelectComponent} from "@ng-select/ng-select";
 import {NotFoundComponent} from "../../modules/not-found/not-found.component";
+import {ProductModalComponent} from "./product-modal/product-modal.component";
 
 
 @NgModule({
-  declarations: [ProductComponent, CategoryComponent],
+  declarations: [ProductComponent, CategoryComponent,
+  ProductModalComponent],
   imports: [
     CommonModule,
     FormsModule,

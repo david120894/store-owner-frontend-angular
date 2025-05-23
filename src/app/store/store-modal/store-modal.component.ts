@@ -31,6 +31,7 @@ export class StoreModalComponent implements OnInit {
     if (this.currentStore) {
       this.initForm()
     }
+    console.log(this.currentStore)
   }
   initForm() {
     this.storeForm.patchValue(this.currentStore)
@@ -40,12 +41,11 @@ export class StoreModalComponent implements OnInit {
     if (this.storeForm.valid) {
       const store: StoreDto = this.storeForm.value
       const text = this.currentStore ? 'Tienda Actualizado correctamente' : 'Tienda Creado correctamente'
-      const objectStore = this.currentStore ? this.storeService.updateStore(this.currentStore.id, store) : this.storeService.createStore(store)
+      const objectStore = this.currentStore? this.storeService.updateStore(this.currentStore.id as number, store) : this.storeService.createStore(store)
       objectStore.subscribe({
         next: (response) => {
           if (response.success) {
             this.ngActiveModal.close('success')
-            console.log(text)
           }
         },
         error: (error) => {
