@@ -14,6 +14,8 @@ import { environment } from 'src/environments/environment';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 // #fake-start#
 import {AuthInterceptor} from "./modules/interceptor/auth-interceptor";
+import {StoreModule} from "@ngrx/store";
+import {storeReducer} from "./modules/store/reducer/store.reducer";
 // #fake-end#
 
 function appInitializer(authService: AuthService) {
@@ -45,6 +47,9 @@ function appInitializer(authService: AuthService) {
     InlineSVGModule.forRoot(),
     NgbModule,
     SweetAlert2Module.forRoot(),
+    StoreModule.forRoot({
+      store:storeReducer
+    })
   ],
   providers: [
     {

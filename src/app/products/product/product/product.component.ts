@@ -2,6 +2,7 @@ import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {ProductService} from "../../../services/product.service";
 import {ProductDto} from "../../../models/product.dto";
+import {ProductModalComponent} from "../product-modal/product-modal.component";
 
 @Component({
   selector: 'app-product',
@@ -29,7 +30,17 @@ export class ProductComponent implements OnInit {
       }
     })
   }
-  openModal(product: ProductDto) {
+  openModal(product?: ProductDto) {
+    const modalRef = this.ngModal.open(ProductModalComponent,
+      { size: 'lg', centered: true});
+    modalRef.componentInstance.currentProduct = product
+    modalRef.result.then((result) => {
+      if (result=== 'success') {
+        this.getProduct()
+      }
+    }, (reason) => {
+      // Handle modal close
+    })
   }
   onImageClick(product: ProductDto) {
     this.selectedProduct = product

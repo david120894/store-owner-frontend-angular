@@ -40,8 +40,8 @@ export class CategoryComponent implements OnInit{
     this.storeService.getStore().subscribe({
       next :(response)  => {
         this.currentListStore=response.data
-        this.storeForm.get('store')?.setValue(this.currentListStore[3])
-        this.onCategorySelected(this.currentListStore[3])
+        this.storeForm.get('store')?.setValue(this.currentListStore[0])
+        this.onCategorySelected(this.currentListStore[0])
       },
       error:(err) => {
 
@@ -54,6 +54,7 @@ export class CategoryComponent implements OnInit{
     this.categoryService.getCategoryByStoreId(idStore).subscribe({
       next :(response)  => {
         this.currentListCategory=response.data
+        console.log(this.currentListCategory)
         this.cdr.detectChanges()
       },
       error:(err) => {
@@ -71,7 +72,8 @@ export class CategoryComponent implements OnInit{
     modalRef.componentInstance.category = category
     modalRef.closed.subscribe(response => {
       if (response==="success") {
-        this.getCategory()
+        this.getCategory(this.storeForm.value.store.id)
+        this.cdr.detectChanges()
       }
     })
   }

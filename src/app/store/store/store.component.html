@@ -9,7 +9,7 @@
   </div>
 </div>
 <div class="card-body">
-  <div class="table-responsive">
+  <div class="table-responsive" [formGroup]="storeForm">
     <table
       class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4"
       style="border: #5d78ff; border-radius: 120px"
@@ -21,29 +21,38 @@
           <th>Teléfono</th>
           <th>Descripción</th>
           <th>Dirección</th>
+          <th>Estado</th>
           <th class="text-center">Acciones</th>
         </tr>
       </thead>
-      <tbody>
-        @for (store of currentListStore; track store) {
-          <tr>
+      <tbody formArrayName="storeArray">
+        @for (store of arrayStore.controls; track store) {
+          <tr [formGroupName]="$index">
             <td class="align-content-center">{{$index + 1}}</td>
-            <td>{{ store.name }}</td>
+            <td>{{ store.value.name }}</td>
             <td class="align-content-center">
-              {{ store.phone }}
-            <td>{{ store.description }}</td>
-            <td>{{ store.address }}</td>
+              {{ store.value.phone }}
+            <td>{{ store.value.description }}</td>
+            <td>{{ store.value.address }}</td>
+            <td>
+              <label class="switch">
+                <input type="checkbox"
+                       (change)="changeStatus(store)"
+                formControlName="status">
+                <span class="slider"></span>
+              </label>
+            </td>
 
             <td class="text-center align-content-center">
               <button
                 class="btn btn-icon btn-light-twitter btn-sm me-3"
-                (click)="delete(store.id)"
+                (click)="delete(store.value.id)"
               >
                 <i class="bi bi-trash fs-4"></i>
               </button>
               <button
                 class="btn btn-icon btn-sm me-3 btn-light-facebook"
-                (click)="openModal(store)"
+                (click)="openModal(store.value)"
               >
                 <i class="bi bi-pencil fs-4"></i>
               </button>

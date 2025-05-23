@@ -34,7 +34,7 @@ export class CategoryModalComponent implements OnInit{
     id: new FormControl(0),
     categoryName : new FormControl(null,Validators.required),
     categoryDescription: new FormControl(null, Validators.required),
-    created: new FormControl(null, Validators.required),
+    created: new FormControl(null),
     store: new FormControl(null, Validators.required)
   })
 
@@ -53,6 +53,7 @@ export class CategoryModalComponent implements OnInit{
     this.storeService.getStore().subscribe({
       next:(response)=> {
         this.currentListStore = response.data
+        this.categories.store.setValue(this.currentListStore[0])
       }
     })
   }
@@ -84,6 +85,12 @@ export class CategoryModalComponent implements OnInit{
     })
   }
   createCategory() {
+
+    if (this.formGroupCategory.invalid) {
+      this.formGroupCategory.markAllAsTouched()
+      return
+    }
+
     const params: CategoryDto = {
       categoryName: this.categories.categoryName.value,
       categoryDescription:this.categories.categoryDescription.value,
